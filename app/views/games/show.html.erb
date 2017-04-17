@@ -1,0 +1,9 @@
+<!-- Fortune -->
+<!-- Form for user input -->
+<% @game = Game.new %>
+<%= @game.show_scrambled_fortune %>
+
+<%= form_tag game_update_path, method: "patch" do %>
+    <%= text_field_tag :user_answer %>
+    <%= submit_tag "Check Answer" %>
+<% end %>
