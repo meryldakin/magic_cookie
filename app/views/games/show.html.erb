@@ -1,11 +1,21 @@
 <!-- Fortune -->
 <!-- Form for user input -->
-<% @game = Game.new %>
+<% @game = Game.find(session[:game_id]) %>
 <%= @game.fortune_scrambler %>
 <br><br>
-<%= @game.original_fortune %>
+Score: <%= @game.score %>
+<br><br>
+
+<% if session[:bear] %>
+<%= "THERES A BEAR "%>
+<% else %>
+<%= "u win cookie" %>
+<% end %>
+
 
 <%= form_tag game_update_path, method: "patch" do %>
     <%= text_field_tag :user_answer %>
+    <%= hidden_field_tag 'game', @game %>
+
     <%= submit_tag "Check Answer" %>
 <% end %>

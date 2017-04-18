@@ -1,5 +1,18 @@
 <h1>User Profile</h1>
 
+
+ <% @user = User.find(session[:user_id]) %>
+ <h2>Welcome, <%= @user.username %>!</h2>
+ <br>
+Current Score: <%= @user.current_score %>
+<br><br>
+Cumulative Score: <%= @user.cumulative_score %>
+<br>
 <p>See name, cumulative score, games played</p>
 
-<p><%= link_to "Start new game", create_game_path %></p>
+<p><%= link_to "Start new game", create_game_path, method:"post" %></p>
+
+
+<%= form_tag('/logout', method: 'delete') do %>
+<%= submit_tag "Logout" %>
+<% end %>
