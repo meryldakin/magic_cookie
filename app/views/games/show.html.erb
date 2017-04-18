@@ -1,6 +1,9 @@
 <!-- Fortune -->
 <!-- Form for user input -->
 <% @game = Game.find(session[:game_id]) %>
+
+<h1>Scrambled Proverb:</h1>
+<br><br>
 <%= @game.fortune_scrambler %>
 <br><br>
 Score: <%= @game.score %>
@@ -12,10 +15,12 @@ Score: <%= @game.score %>
 <%= "u win cookie" %>
 <% end %>
 
+<div class="well">
+  <h1>Unscramble the fortune to get the cookie!</h1>
+  <%= form_tag game_update_path, method: "patch" do %>
+      <%= text_field_tag :user_answer %>
+      <%= hidden_field_tag 'game', @game %>
 
-<%= form_tag game_update_path, method: "patch" do %>
-    <%= text_field_tag :user_answer %>
-    <%= hidden_field_tag 'game', @game %>
-
-    <%= submit_tag "Check Answer" %>
-<% end %>
+      <%= submit_tag "Check Answer" %>
+  <% end %>
+</div>
