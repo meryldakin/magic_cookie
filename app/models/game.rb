@@ -3,6 +3,8 @@ class Game < ApplicationRecord
   has_many :game_fortunes
   has_many :fortunes, through: :game_fortunes
 
+  @@original_fortune = Fortune.select_fortune.proverb
+
 
   def gameplay
     show_scrambled_fortune
@@ -16,9 +18,19 @@ class Game < ApplicationRecord
     end
   end
 
-  def show_scrambled_fortune
-    @scrambled_fortune = Fortune.fortune_scrambler
+  def fortune_scrambler
+    # @fortune = Fortune.all.sample
+    # @fortune = Fortune.select_fortune
 
+    # @original_fortune = original_fortune
+    @fortune = @@original_fortune.downcase.gsub(/[^a-z0-9\s]/i, '') #removes punctation
+    @fortune.split(' ').shuffle.join(' ')
+  end
+
+
+  def original_fortune
+    @@original_fortune 
+    # @original_fortune.proverb
   end
 
   def check_user_input
