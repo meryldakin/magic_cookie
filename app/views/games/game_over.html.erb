@@ -1,3 +1,7 @@
-Game over
+<% if session[:won] = true %>
+  <%= "u won" %>
+<% else %>
+  <%= "u lost" %>
+<% end %>
 
 <%= link_to "Go to user path ", user_path(User.find(session[:user_id])) %>

@@ -34,6 +34,11 @@ class GamesController < ApplicationController
       user.cumulative_score += @game.score
       user.current_score = @game.score
       user.save
+      if @game.score == 3
+        session[:won] = true
+      else
+        session[:won] = false
+      end
       redirect_to game_over_path(@game)
     end
   end
