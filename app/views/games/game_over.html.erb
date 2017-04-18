@@ -1,7 +1,19 @@
-<% if session[:won] = true %>
-  <%= "u won" %>
-<% else %>
-  <%= "u lost" %>
-<% end %>
+<% @game = Game.find(session[:game_id]) %>
+<% @user = User.find(session[:user_id]) %>
+<div class="jumbotron">
+  <div class="container">
 
-<%= link_to "Go to user path ", user_path(User.find(session[:user_id])) %>
+    <% if session[:won] == true %>
+    <h1> You win all the fortune cookies!</h1>
+    <p class="lead">final score: <%= @game.score %></p>
+    <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
+    pic of fortune cookies
+    <% else %>
+    <h1>Cookie bear eats your fortunes :(</h1>
+    <p class="lead">final score: <%= @game.score %></p>
+    <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
+    pic of cookie bear
+    <% end %>
+    <p><a class="btn btn-primary btn-lg" href="/users/<%= @user.id %>" role="button">User Homepage</a></button></p>
+  </div>
+</div>
