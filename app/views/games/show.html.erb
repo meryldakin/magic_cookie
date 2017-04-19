@@ -6,7 +6,15 @@
 <% end %>
 Score: <%= @game.score %>
 <div class="container">
+
+
+
   <h3 class="center-align">Unscramble the fortune to get the cookie!</h3>
+<br>
+
+  <h1><div id="countdown_clock"></div></h1>
+  <h1><div><span id="time">clock</span> seconds!</div></h1>
+
 
       <div class="card horizontal medium">
         <div class="card-image">
@@ -18,7 +26,7 @@ Score: <%= @game.score %>
               <div id="text">
                 <%= @game.fortune_scrambler %>
               </div>
-            </h4>            
+            </h4>
           </div>
           <div class="card-action">
             <a href="#">This is a link</a>
@@ -34,13 +42,16 @@ Score: <%= @game.score %>
     <%= form_tag game_update_path, method: "patch" do %>
         <%= text_field_tag :user_answer %>
         <%= hidden_field_tag 'game', @game %>
-        <%= submit_tag "Check Answer", class:"btn" %>
+        <%= submit_tag "Check Answer", id: "answer_btn", class:"btn" %>
     <% end %>
     <button id="shuffle" type="button" class="btn">Shuffle Words</button>
   </div>
 
 </div>
+
 <script>
+
+//shuffle:
 
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -58,5 +69,40 @@ document.addEventListener('DOMContentLoaded', function(){
         textDiv.innerText = result;
     }, false);
 }, false)
+
+//timer:
+
+function startTimer(duration, display) {
+  var start = Date.now(),
+      deferred = $.Deferred(),
+      display = document.getElementById(display),
+      diff, minutes, seconds, i;
+
+  function timer() {
+    diff = duration - (((Date.now() - start) / 1000) | 0);
+
+    minutes = (diff / 60) | 0;
+    seconds = (diff % 60) | 0;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    display.textContent = minutes + ":" + seconds;
+
+    if (diff <= 0) {
+      clearInterval(i);
+      deferred.resolve();
+    }
+  };
+
+  timer();
+  i = setInterval(timer, 1000);
+
+  return deferred.promise();
+}
+
+startTimer(10, 'time').then(function(){
+    $("#answer_btn").trigger("click");
+});
 
 </script>
