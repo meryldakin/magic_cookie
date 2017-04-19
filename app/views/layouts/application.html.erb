@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,32 +11,82 @@
 
   <body>
 
-<% unless !logged_in? %>
-  "navbar"
-<% end %>
+    <% unless !logged_in? %>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">
+            Magic Cookies
+          </a>
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+             <li>
+               <%= link_to("New Game", create_game_path, method: :post, class: "waves-effect waves-light btn")%>
+
+
+             </li>
+             <li><%= link_to "See All Users", users_path %></li>
+           </ul>
+           <ul id="nav-mobile" class="right hide-on-med-and-down">
+             <li><%= link_to "My Profile", user_path(User.find(session[:user_id])) %></li>
+             <li><%= link_to "Logout", logout_path, method:"delete" %></li>
+           </ul>
+
+         </div>
+       </nav>
+     <% end %>
+
 
     <div class="container">
       <div class="row">
         <div class="col s9">
           <%= yield %>
-
         </div>
+        <% unless !logged_in? %>
         <div class="col s3">
-          <div class="card-panel teal">
-            <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-            </span>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-            <a href="#">This is a link</a>
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Top User Scores</span>
+              <% @users = User.all %>
+              <% top_three_scores = @users.sort_by do |user| %>
+                <% user.cumulative_score %>
+              <% end.reverse[0..2] %>
+                <table>
+                  <thead>
+                    <th>Username</th>
+                    <th>Score</th>
+                  </thead>
+                  <tbody>
+                    <% new_array = top_three_scores.map do |user| %>
+                    <tr>
+                      <td><%= "#{user.username}" %></td>
+                      <td><%= "#{user.cumulative_score}" %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              <br>
+              <span class="card-title">Top Game Scores</span>
+              <% top_three_scores = @users.sort_by do |user| %>
+                <% user.current_score %>
+              <% end.reverse[0..2] %>
+              <table>
+                <thead>
+                  <th>Username</th>
+                  <th>Score</th>
+                </thead>
+                <tbody>
+                  <% new_array = top_three_scores.map do |user| %>
+                  <tr>
+                    <td><%= "#{user.username}" %></td>
+                    <td><%= "#{user.current_score}" %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+                <br>
+            </div>
           </div>
         </div>
-
       </div>
-      <div class="row">
-
-      </div>
-    </div>
+      <% end %>
   </body>
 </html>

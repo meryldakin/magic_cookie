@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
-
+  before_action :require_login
+  
   def new
+    redirect_to create_game_path
   end
 
   def create

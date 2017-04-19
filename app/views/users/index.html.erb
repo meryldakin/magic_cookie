@@ -1,39 +1,4 @@
-
-<h1>Highest Cumulative Score</h1>
-
-<% top_three_scores = @users.sort_by do |user| %>
-  <% user.cumulative_score %>
-<% end.reverse[0..2] %>
-
-<% new_array = top_three_scores.map do |user| %>
-  <%= "Username: #{user.username} -- Cumulative Score: #{user.cumulative_score}" %>
-  <br>
-<% end %>
-
-
-
-
-<!-- @users.sort_by{|user| user.cumulative_score}.reverse[0..2] -->
-<!-- top_three_scores.map{ |user| "#{user.username}  #{user.cumulative_score}"} -->
-
-
-<br><br>
-<br><br>
-
-
-<h1>Highest Current Score</h1>
-
-<% top_three_scores = @users.sort_by do |user| %>
-  <% user.current_score %>
-<% end.reverse[0..2] %>
-
-<% new_array = top_three_scores.map do |user| %>
-  <%= "Username: #{user.username} -- Current Score: #{user.current_score}" %>
-  <br>
-<% end %>
-
-<br><br>
-<h1>All Users</h1>
+<h1>All Players</h1>
 
 
 <% @users.each do |user| %>

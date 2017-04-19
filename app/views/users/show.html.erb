@@ -1,19 +1,22 @@
 <% @user = User.find(session[:user_id]) %>
-<h1><%= @user.username %> Profile</h1>
-
-<p><%= link_to "Start new game", create_game_path, method:"post" %></p>
-<br>
-
-<p><%= link_to "Edit username", edit_user_path, method:"get" %></p>
-<br>
-
-Current Score: <%= @user.current_score %>
-<br><br>
-Cumulative Score: <%= @user.cumulative_score %>
-<br>
 <% games = @user.games %>
-<br>
-Game Scores:
+<h1><%= @user.username %></h1>
+<div class="row">
+  <div class="col s12 m5">
+    <div class="card-panel teal">
+      <span class="white-text">
+        Latest Score: <%= @user.current_score %>
+      </span>
+    </div>
+  </div>
+  <div class="col s12 m5">
+    <div class="card-panel teal">
+      <span class="white-text">
+        Cumulative Score: <%= @user.cumulative_score %>
+      </span>
+    </div>
+  </div>
+</div>
 <table class="striped">
   <thead>
     <th>Game</th>
