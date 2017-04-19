@@ -1,7 +1,13 @@
 <!-- Fortune -->
 <!-- Form for user input -->
+<br><br>
 <% @game = Game.find(session[:game_id]) %>
-<%= @game.fortune_scrambler %>
+
+<div id="cardContainer" draggable="true"></div>
+
+<div id="text"><%= @game.fortune_scrambler %></div>
+<br>
+<button id="shuffle" type="button">Shuffle</button>
 <br><br>
 Score: <%= @game.score %>
 <br><br>
@@ -19,3 +25,26 @@ Score: <%= @game.score %>
 
     <%= submit_tag "Check Answer" %>
 <% end %>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){
+
+    var textDiv = document.getElementById('text');
+    document.getElementById('shuffle').addEventListener('click',function(){
+        var words = textDiv.innerText.split(' ');
+        var len = words.length;
+        var result = '';
+        textDiv.innerText = '';
+        for(var i = 0; i < len; ++i){
+            var randIndex = Math.floor((Math.random() * (words.length)));
+            result += words[randIndex] + ' ';
+            words.splice(randIndex, 1);
+        }
+        textDiv.innerText = result;
+    }, false);
+
+}, false)
+
+</script>
