@@ -23,7 +23,7 @@
 
 
              </li>
-             <li><%= link_to "See All Users", users_path %></li>
+             <li><%= link_to "See All Players", users_path %></li>
            </ul>
            <ul id="nav-mobile" class="right hide-on-med-and-down">
              <li><%= link_to "My Profile", user_path(User.find(session[:user_id])) %></li>
@@ -42,7 +42,7 @@
       <div class="col s3">
         <div class="card blue-grey lighten-2">
           <div class="card-content white-text">
-            <span class="card-title">Top User Scores</span>
+            <span class="card-title">Top Player Scores</span>
             <% @users = User.all %>
             <% top_three_scores = @users.sort_by do |user| %>
               <% user.cumulative_score %>

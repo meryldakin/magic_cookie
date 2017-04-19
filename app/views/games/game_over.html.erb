@@ -5,7 +5,7 @@
 
     <% if session[:won] == true %>
     <h3> You win all the fortune cookies!</h3>
-    <%= image_tag("victory.gif", :alt => "vitroy") %>
+    <%= image_tag("defeated_bear.gif", :alt => "victroy") %>
     <div class="row">
       <div class="col s12 m5">
         <div class="card-panel teal">
@@ -23,7 +23,10 @@
       </div>
     </div>
     <% else %>
-    <h3>Cookie bear eats your fortunes :(</h3>
+    <h3 class="center-align">Cookie bear eats your fortunes :(</h3>
+    <div class="center-align">
+      <%= image_tag("bear_cry.gif", :alt => "cry bear") %>
+    </div>
     <div class="row">
       <div class="col s12 m5">
         <div class="card-panel teal">
@@ -41,7 +44,6 @@
       </div>
     </div>
     <% end %>
-    <%= image_tag("bear_cry.gif", :alt => "cry bears") %>
     <%= link_to("Play Again!", create_game_path, method: :post, class: "waves-effect waves-light btn")%>
   </div>
 </div>

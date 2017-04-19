@@ -1,6 +1,7 @@
 
 @import "materialize";
 @import url('https://fonts.googleapis.com/css?family=Griffy');
+@import url('https://fonts.googleapis.com/css?family=Alegreya|Averia+Serif+Libre|Cabin+Sketch|IM+Fell+English+SC|Sorts+Mill+Goudy|Special+Elite');
 
 .nav-wrapper {
   background-color: #ffc107 !important;
@@ -11,6 +12,26 @@ blockquote{
   border-left: 5px solid teal; /* Just change the color value and that's it*/
 }
 
-html {
+h1, h2, h3 {
   font-family: "Griffy", cursive;
+}
+
+html {
+   font-family: 'Averia Serif Libre', cursive;
+ }
+
+th {
+  font-size: 23px
+}
+
+p, li, td {
+  font-size: 20px
+}
+
+.card-panel {
+  font-size: 20px
+}
+
+.red-text {
+  font-color: red;
 }

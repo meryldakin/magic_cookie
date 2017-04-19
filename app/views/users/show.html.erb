@@ -1,6 +1,6 @@
 <% @user = User.find(session[:user_id]) %>
 <% games = @user.games %>
-<h1><%= @user.username %></h1>
+<h1>player: <%= @user.username %></h1>
 <div class="row">
   <div class="col s12 m5">
     <div class="card-panel teal">
