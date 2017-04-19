@@ -8,6 +8,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.create(user_id: session[:user_id], score: 0)
     session[:game_id] = @game.id
+    session[:bear] = "new"
     redirect_to game_path(@game)
   end
 
@@ -23,12 +24,12 @@ class GamesController < ApplicationController
         # == @game.original_fortune.downcase.gsub(/[^a-z0-9\s]/i, '')
         @game.score += 100
         @game.save
-        session[:bear] = false
+        session[:bear] = "won" #won a round
         redirect_to game_path(@game)
       else
         @game.score -= 75
         @game.save
-        session[:bear] = true
+        session[:bear] = "lost" #lost a round
         redirect_to game_path(@game)
       end
     elsif @game.score > 299 || @game.score < -74

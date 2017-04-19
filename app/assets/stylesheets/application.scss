@@ -28,8 +28,15 @@ p, li, td {
 .nav-wrapper {
   background-color: #ffc107 !important;
 }
+
 .card-panel {
-  font-size: 20px
+  font-size: 20px;
+}
+
+.card-red-border {
+  border:5px solid red;
+  border-radius: 10px;
+
 }
 
 .card-image-fortune {
@@ -37,4 +44,8 @@ p, li, td {
 }
 .red-text {
   font-color: red;
+}
+
+.small-fonter {
+  font-size: 38px;
 }
