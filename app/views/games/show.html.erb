@@ -3,8 +3,6 @@
 <br><br>
 <% @game = Game.find(session[:game_id]) %>
 
-<div id="cardContainer" draggable="true"></div>
-
 <div id="text"><%= @game.fortune_scrambler %></div>
 <br>
 <button id="shuffle" type="button">Shuffle</button>
@@ -44,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         textDiv.innerText = result;
     }, false);
-
 }, false)
 
 </script>
