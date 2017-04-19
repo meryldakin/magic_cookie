@@ -1,2 +1,16 @@
 
 @import "materialize";
+@import url('https://fonts.googleapis.com/css?family=Griffy');
+
+.nav-wrapper {
+  background-color: #ffc107 !important;
+}
+blockquote{
+  margin: 20px 0;
+  padding-left: 1.5rem;
+  border-left: 5px solid teal; /* Just change the color value and that's it*/
+}
+
+html {
+  font-family: "Griffy", cursive;
+}

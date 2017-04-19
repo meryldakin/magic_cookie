@@ -1,38 +1,42 @@
-<!-- Fortune -->
-<!-- Form for user input -->
-<br><br>
 <% @game = Game.find(session[:game_id]) %>
+<% if session[:bear] %>
+<%= "THERES A BEAR "%>
+<% else %>
+<%= "u win cookie" %>
+<% end %>
+Score: <%= @game.score %>
 <div class="container">
+  <h3 class="center-align">Unscramble the fortune to get the cookie!</h3>
 
-  <h1>Scrambled Proverb:</h1>
-  <br><br>
-  <blockquote>
-  <div id="text">
-    <%= @game.fortune_scrambler %>
-  </div>
-  </blockquote>
-  <br>
-  <button id="shuffle" type="button">Shuffle</button>
+      <div class="card horizontal medium">
+        <div class="card-image">
+          <%= image_tag("doom.png", :alt => "doom") %>
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4>
+              <div id="text">
+                <%= @game.fortune_scrambler %>
+              </div>
+            </h4>            
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+          </div>
+        </div>
+      </div>
 
-  <br><br>
-  Score: <%= @game.score %>
-  <br><br>
 
-  <% if session[:bear] %>
-    <%= "THERES A BEAR "%>
-  <% else %>
-    <%= "u win cookie" %>
-  <% end %>
 
-  <div class="well">
-    <h1>Unscramble the fortune to get the cookie!</h1>
+
+
+  <div class="right">
     <%= form_tag game_update_path, method: "patch" do %>
         <%= text_field_tag :user_answer %>
         <%= hidden_field_tag 'game', @game %>
-
-
-        <%= submit_tag "Check Answer" %>
+        <%= submit_tag "Check Answer", class:"btn" %>
     <% end %>
+    <button id="shuffle" type="button" class="btn">Shuffle Words</button>
   </div>
 
 </div>
