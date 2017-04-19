@@ -2,38 +2,40 @@
 <!-- Form for user input -->
 <br><br>
 <% @game = Game.find(session[:game_id]) %>
+<div class="container">
 
-<h1>Scrambled Proverb:</h1>
-<br><br>
-<blockquote>
-<div id="text">
-  <%= @game.fortune_scrambler %>
-</div>
-</blockquote>
-<br>
-<button id="shuffle" type="button">Shuffle</button>
+  <h1>Scrambled Proverb:</h1>
+  <br><br>
+  <blockquote>
+  <div id="text">
+    <%= @game.fortune_scrambler %>
+  </div>
+  </blockquote>
+  <br>
+  <button id="shuffle" type="button">Shuffle</button>
 
-<br><br>
-Score: <%= @game.score %>
-<br><br>
+  <br><br>
+  Score: <%= @game.score %>
+  <br><br>
 
-<% if session[:bear] %>
-<%= "THERES A BEAR "%>
-<% else %>
-<%= "u win cookie" %>
-<% end %>
-
-<div class="well">
-  <h1>Unscramble the fortune to get the cookie!</h1>
-  <%= form_tag game_update_path, method: "patch" do %>
-      <%= text_field_tag :user_answer %>
-      <%= hidden_field_tag 'game', @game %>
-
-
-      <%= submit_tag "Check Answer" %>
+  <% if session[:bear] %>
+    <%= "THERES A BEAR "%>
+  <% else %>
+    <%= "u win cookie" %>
   <% end %>
-</div>
 
+  <div class="well">
+    <h1>Unscramble the fortune to get the cookie!</h1>
+    <%= form_tag game_update_path, method: "patch" do %>
+        <%= text_field_tag :user_answer %>
+        <%= hidden_field_tag 'game', @game %>
+
+
+        <%= submit_tag "Check Answer" %>
+    <% end %>
+  </div>
+
+</div>
 <script>
 
 document.addEventListener('DOMContentLoaded', function(){

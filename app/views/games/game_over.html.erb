@@ -5,14 +5,17 @@
 
     <% if session[:won] == true %>
     <h1> You win all the fortune cookies!</h1>
+    <%= image_tag("victory.gif", :alt => "rss feed") %>
     <p class="lead">final score: <%= @game.score %></p>
     <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
     pic of fortune cookies
     <% else %>
     <h1>Cookie bear eats your fortunes :(</h1>
+    <%= image_tag("bear_cry.gif", :alt => "rss feed") %>
     <p class="lead">final score: <%= @game.score %></p>
     <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
-    pic of cookie bear
+    <!-- <%= image_path("bear_cry.gif") %> -->
+    <!-- <img src=image_path("image.jpg") alt="bear cry"> -->
     <% end %>
     <p><a class="btn btn-primary btn-lg" href="/users/<%= @user.id %>" role="button">User Homepage</a></button></p>
   </div>
