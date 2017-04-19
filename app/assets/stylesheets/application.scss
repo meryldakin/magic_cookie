@@ -3,9 +3,6 @@
 @import url('https://fonts.googleapis.com/css?family=Griffy');
 @import url('https://fonts.googleapis.com/css?family=Alegreya|Averia+Serif+Libre|Cabin+Sketch|IM+Fell+English+SC|Sorts+Mill+Goudy|Special+Elite');
 
-.nav-wrapper {
-  background-color: #ffc107 !important;
-}
 blockquote{
   margin: 20px 0;
   padding-left: 1.5rem;
@@ -28,10 +25,16 @@ p, li, td {
   font-size: 20px
 }
 
+.nav-wrapper {
+  background-color: #ffc107 !important;
+}
 .card-panel {
   font-size: 20px
 }
 
+.card-image-fortune {
+  float: right;
+}
 .red-text {
   font-color: red;
 }
