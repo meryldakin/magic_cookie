@@ -4,16 +4,44 @@
   <div class="container">
 
     <% if session[:won] == true %>
-    <h1> You win all the fortune cookies!</h1>
-    <p class="lead">final score: <%= @game.score %></p>
-    <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
-    pic of fortune cookies
+    <h3> You win all the fortune cookies!</h3>
+    <%= image_tag("victory.gif", :alt => "vitroy") %>
+    <div class="row">
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+          <span class="white-text">
+            Final Score: <%= @game.score %>
+          </span>
+        </div>
+      </div>
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+          <span class="white-text">
+            Player Score: <%= @user.cumulative_score %>
+          </span>
+        </div>
+      </div>
+    </div>
     <% else %>
-    <h1>Cookie bear eats your fortunes :(</h1>
-    <p class="lead">final score: <%= @game.score %></p>
-    <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
-    pic of cookie bear
+    <h3>Cookie bear eats your fortunes :(</h3>
+    <div class="row">
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+          <span class="white-text">
+            Final Score: <%= @game.score %>
+          </span>
+        </div>
+      </div>
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+          <span class="white-text">
+            Player Score: <%= @user.cumulative_score %>
+          </span>
+        </div>
+      </div>
+    </div>
     <% end %>
-    <p><a class="btn btn-primary btn-lg" href="/users/<%= @user.id %>" role="button">User Homepage</a></button></p>
+    <%= image_tag("bear_cry.gif", :alt => "cry bears") %>
+    <%= link_to("Play Again!", create_game_path, method: :post, class: "waves-effect waves-light btn")%>
   </div>
 </div>

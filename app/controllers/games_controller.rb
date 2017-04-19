@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
+  before_action :require_login
 
   def new
+    redirect_to create_game_path
   end
 
   def create
@@ -24,17 +26,17 @@ class GamesController < ApplicationController
         session[:bear] = false
         redirect_to game_path(@game)
       else
-        @game.score -= -75
+        @game.score -= 75
         @game.save
         session[:bear] = true
         redirect_to game_path(@game)
       end
-    elsif @game.score == 300 || @game.score < -75
+    elsif @game.score > 299 || @game.score < -74
       user = User.find(session[:user_id])
       user.cumulative_score += @game.score
       user.current_score = @game.score
       user.save
-        if @game.score == 300
+        if @game.score > 299
           session[:won] = true
         else
           session[:won] = false
