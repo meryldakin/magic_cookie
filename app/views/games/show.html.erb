@@ -12,7 +12,7 @@ Score: <%= @game.score %>
   <h3 class="center-align">Unscramble the fortune to get the cookie!</h3>
 <br>
 
-  <h1><div id="countdown_clock"></div></h1>
+
   <h1><div><span id="time">clock</span> seconds!</div></h1>
 
 
@@ -40,7 +40,8 @@ Score: <%= @game.score %>
 
   <div class="right">
     <%= form_tag game_update_path, method: "patch" do %>
-        <%= text_field_tag :user_answer %>
+        <%= text_field_tag :user_answer, '', autofocus: true %>
+        <!-- above line autofocuses cursor on within text field  -->
         <%= hidden_field_tag 'game', @game %>
         <%= submit_tag "Check Answer", id: "answer_btn", class:"btn" %>
     <% end %>
