@@ -12,8 +12,10 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     @user.current_score = 0
     @user.cumulative_score = 0
+
     if @user.save
       session[:user_id] = @user.id
+      session[:ready] = false
       redirect_to user_path(@user)
       # redirect_to user_path(@user)
     else

@@ -1,4 +1,3 @@
-<% @game = Game.find(session[:game_id]) %>
 <h3 class="center-align small-fonter">Unscramble the fortune in <span id="time", class="red-text">clock</span> seconds to get the cookie!</h3>
 <div class="container">
   <% if session[:bear] == "new" %>
@@ -126,7 +125,7 @@ function startTimer(duration, display) {
   return deferred.promise();
 }
 
-startTimer(20, 'time').then(function(){
+startTimer(30, 'time').then(function(){
     $("#answer_btn").trigger("click");
 });
 

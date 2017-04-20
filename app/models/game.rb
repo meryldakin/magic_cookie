@@ -6,31 +6,20 @@ class Game < ApplicationRecord
 
   # @@original_fortune = Fortune.select_fortune.proverb
 
-
-
-  def gameplay
-    show_scrambled_fortune
-    check_user_input
-    if #correct
-      correct_answer
-    elsif #incorrect
-      incorrect_answer
-    elsif #bad_answer
-      bad_answer
-    end
-  end
-
-  def game_fortunes
-    five_proverbs = Fortune.all.shuffle.take(5)
-  end
-
   def fortune_scrambler
     # @fortune = Fortune.all.sample
     # @fortune = Fortune.select_fortune
     # @original_fortune = original_fortune
-    @original_fortune = Fortune.select_fortune.proverb
-    @fortune = @original_fortune.downcase.gsub(/[^a-z0-9\s]/i, '') #removes punctation
-    @fortune.split(' ').shuffle.join(' ')
+    original_fortune = Fortune.select_fortune
+    self.fortunes << original_fortune
+    self.save
+    fortune = original_fortune.proverb.downcase.gsub(/[^a-z0-9\s]/i, '') #removes punctation
+    fortune.split(' ').shuffle.join(' ')
+  end
+
+  def current_fortune
+    current_fortune_id = self.game_fortunes.last.fortune_id
+    Fortune.find(current_fortune_id)
   end
 
   def self.all_fortunes

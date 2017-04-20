@@ -14,15 +14,14 @@ class GamesController < ApplicationController
   end
 
   def show
-
+    @game = Game.find(session[:game_id])
   end
 
   def update
     @answer = params[:user_answer]
     @game = Game.find(session[:game_id])
     if @game.score < 300 && @game.score > -75 #if game is active
-      if Game.all_fortunes.include?(@answer.downcase.gsub(/[^a-z0-9\s]/i, ''))
-        # == @game.original_fortune.downcase.gsub(/[^a-z0-9\s]/i, '')
+      if @answer.downcase.gsub(/[^a-z0-9\s]/i, '') == @game.current_fortune.proverb.downcase.gsub(/[^a-z0-9\s]/i, '')
         @game.score += 100
         @game.save
         session[:bear] = "won" #won a round
@@ -33,7 +32,7 @@ class GamesController < ApplicationController
         session[:bear] = "lost" #lost a round
         redirect_to game_path(@game)
       end
-    elsif @game.score > 299 || @game.score < -74
+    else
       user = User.find(session[:user_id])
       user.cumulative_score += @game.score
       user.current_score = @game.score
