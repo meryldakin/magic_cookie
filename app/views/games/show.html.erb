@@ -58,7 +58,8 @@
       </div>
       <div class="card-action">
         <%= form_tag game_update_path, method: "patch" do %>
-        <%= text_field_tag :user_answer %>
+        <%= text_field_tag :user_answer, '', autofocus: true %>
+        <!-- above line autofocuses cursor on within text field  -->
         <%= hidden_field_tag 'game', @game %>
         <%= submit_tag "Submit Answer", id:"answer_btn", class:"btn" %>
         <% end %>
