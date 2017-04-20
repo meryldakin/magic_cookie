@@ -17,9 +17,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       session[:ready] = false
       redirect_to user_path(@user)
-      # redirect_to user_path(@user)
     else
-      # flash[:notice] = "Sorry, you must enter all the fields!"
       redirect_to home_path
     end
   end

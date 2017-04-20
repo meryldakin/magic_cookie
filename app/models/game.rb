@@ -22,6 +22,11 @@ class Game < ApplicationRecord
     Fortune.find(current_fortune_id)
   end
 
+  def last_fortune
+    last_fortune_id = self.game_fortunes[-2].fortune_id
+    Fortune.find(last_fortune_id)
+  end
+
   def self.all_fortunes
     Fortune.all.map do |fortune|
       fortune.proverb.downcase.gsub(/[^a-z0-9\s]/i, '')
