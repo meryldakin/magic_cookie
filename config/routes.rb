@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #
   #Sessions
-  get '/', to: 'sessions#index', as: 'home'
   get '/login', to: 'sessions#new', as: 'login'
   post '/sessions', to: 'sessions#create', as: 'create_login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
@@ -24,6 +23,10 @@ Rails.application.routes.draw do
   patch '/games/:id', to: 'games#update', as: 'game_update'
   get '/games/:id/game_over', to: 'games#game_over', as: 'game_over'
 
+  #Static
+  get '/', to: 'static_pages#home', as: 'home'
+  get '/about', to: 'static_pages#about', as: 'about'
+  get '/ready', to: 'static_pages#ready', as: 'ready'
 
 
 end

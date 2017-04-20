@@ -1,53 +1,72 @@
-<% @game = Game.find(session[:game_id]) %>
-<% if session[:bear] %>
-<%= "THERES A BEAR "%>
-<% else %>
-<%= "u win cookie" %>
-<% end %>
-Score: <%= @game.score %>
+<h3 class="center-align small-fonter">Unscramble the fortune in <span id="time", class="red-text">clock</span> seconds to get the cookie!</h3>
 <div class="container">
-
-
-
-  <h3 class="center-align">Unscramble the fortune to get the cookie!</h3>
-<br>
-
-
-  <h1><div><span id="time">clock</span> seconds!</div></h1>
-
-
-      <div class="card horizontal medium">
-        <div class="card-image">
-          <%= image_tag("doom.png", :alt => "doom") %>
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <h4>
-              <div id="text">
-                <%= @game.fortune_scrambler %>
-              </div>
-            </h4>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-          </div>
-        </div>
+  <% if session[:bear] == "new" %>
+  <div class="card-panel yellow lighten-4">
+    <span class="black-text ">
+      <div class="left valign-wrapper">
       </div>
-
-
-
-
-
-  <div class="right">
-    <%= form_tag game_update_path, method: "patch" do %>
-        <%= text_field_tag :user_answer, '', autofocus: true %>
-        <!-- above line autofocuses cursor on within text field  -->
-        <%= hidden_field_tag 'game', @game %>
-        <%= submit_tag "Check Answer", id: "answer_btn", class:"btn" %>
-    <% end %>
-    <button id="shuffle" type="button" class="btn">Shuffle Words</button>
+      <div class="right valign-wrapper">
+        <%= @game.score %>
+      </div>
+      <br>
+    </span>
   </div>
+  <% elsif session[:bear] == "lost"%>
+  <div class="card-panel yellow lighten-4 card-red-border">
+    <span class="black-text ">
+      <div class="left valign-wrapper">
+        <%= image_tag("bear_icon.png", :alt => "bear", style:"width:50px;height:50px;") %>  COOKIE BEAR GOT UR COOKIE
+        <br>
+      </div>
+      <div class="right valign-wrapper">
+        <%= @game.score %> <%= image_tag("trophy.png", :alt => "trophy", style:"width:50px;height:50px;") %>
+      </div>
+      <br>
+    </span>
+  </div>
+  <% elsif session[:bear] == "won" %>
+  <div class="card-panel yellow lighten-4">
+    <span class="black-text ">
+      <div class="left valign-wrapper card-image-fortune">
+        <%= image_tag("fortune_icon.png", :alt => "fortune", style:"width:50px;height:50px;") %>  U WON A COOKIE
+      </div>
+      <div class="right valign-wrapper">
+        <%= @game.score %> <%= image_tag("trophy.png", :alt => "trophy", style:"width:50px;height:50px;") %>
+      </div>
+      <br>
+    </span>
+  </div>
+  <% end %>
 
+
+  <div class="card horizontal medium">
+    <div class="card-image">
+      <%= image_tag("doom.png", :alt => "doom") %>
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <h4>
+          <button id="shuffle" type="button" class="btn">Shuffle Words</button>
+          <br><br>
+          <div id="text">
+            <%= @game.fortune_scrambler %>
+          <br>
+          </div>
+          <br>
+        </h4>
+      </div>
+      <div class="card-action">
+        <%= form_tag game_update_path, method: "patch" do %>
+        <%= text_field_tag :user_answer, '', autofocus: true %>
+        <%= hidden_field_tag 'game', @game %>
+        <%= submit_tag "Submit Answer", id:"answer_btn", class:"btn" %>
+        <% end %>
+        <% if session[:bear] == "lost" %>
+        <%= @game.last_fortune.proverb %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -88,7 +107,7 @@ function startTimer(duration, display) {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    display.textContent = minutes + ":" + seconds;
+    display.textContent = seconds;
 
     if (diff <= 0) {
       clearInterval(i);
@@ -102,7 +121,7 @@ function startTimer(duration, display) {
   return deferred.promise();
 }
 
-startTimer(10, 'time').then(function(){
+startTimer(30, 'time').then(function(){
     $("#answer_btn").trigger("click");
 });
 
