@@ -12,7 +12,7 @@ class Fortune < ApplicationRecord
   # end
 
   def self.select_fortune
-    @fortune = Fortune.all.sample #returns instance random fortune
+    fortune = Fortune.all.sample #returns instance random fortune
     #@fortune.proverb #returns the string from that instance
   end
 
