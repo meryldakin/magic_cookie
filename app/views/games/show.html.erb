@@ -57,12 +57,12 @@
       </div>
       <div class="card-action">
         <%= form_tag game_update_path, method: "patch" do %>
-        <%= text_field_tag :user_answer, '', autofocus: true %>
-        <%= hidden_field_tag 'game', @game %>
-        <%= submit_tag "Submit Answer", id:"answer_btn", class:"btn" %>
+          <%= text_field_tag :user_answer, '', autofocus: true %>
+          <%= hidden_field_tag 'game', @game %>
+          <%= submit_tag "Submit Answer", id:"answer_btn", class:"btn" %>
         <% end %>
         <% if session[:bear] == "lost" %>
-        <%= @game.last_fortune.proverb %>
+          <%= @game.last_fortune.proverb %>
         <% end %>
       </div>
     </div>
