@@ -1,28 +1,40 @@
-
 <% games = @user.games %>
-<%= link_to "Edit Profile", edit_user_path(@user) %>
-<h1 class="center-align">player: <%= @user.username %></h1>
-<h3 class="center-align">favorite fortune:</h3>
-<h4 class="red-text center-align"><%= @user.favorite_fortune %></h4>
+<div class="center-align row">
+  <div class="col s12">
+    <h1 class="center-align big-fonter"> <%= @user.username.upcase %>
+    <% if user_path(@user) == user_path(User.find(session[:user_id])) %>
+      <%= link_to edit_user_path(@user) do %>
+        <i class="material-icons icon">mode_edit</i>
+      <% end %>
+    <% end %>
+    </h1>
+  </div>
+</div>
 <div class="row">
   <div class="col s4">
-    <div class="card-panel teal">
-      <span class="white-text">
-        Latest Score: <%= @user.current_score %>
-      </span>
-    </div>
-  </div>
-  <div class="col s4">
-    <div class="card-panel teal">
-      <span class="white-text">
-        Cumulative Score: <%= @user.cumulative_score %>
-      </span>
-    </div>
-  </div>
-  <div class="col s4">
-    <div class="card-panel teal">
-      <span class="white-text">
+    <div class="card-panel ">
+      <span class="black-text">
+        <div class="center-align">
+          <i class="material-icons">assessment</i>
+
+        </div>
+        <br>
+        Latest Cookie Points: <%= @user.current_score %>
+        <br>
+        All Cookie Points: <%= @user.cumulative_score %>
+        <br>
         Games Played: <%= @user.games.count %>
+      </span>
+    </div>
+  </div>
+  <div class="col s8">
+    <div class="card-panel ">
+      <span class="black-text">
+        <div class="center-align">
+          <%= image_tag ("fortune_icon.png"), style:"width:25px;height:25px;"%>
+
+        </div>
+        <h4 class="teal-text center-align"><%= @user.favorite_fortune %></h4>
       </span>
     </div>
   </div>
@@ -30,7 +42,7 @@
 <table class="striped">
   <thead>
     <th>Game (most recent first)</th>
-    <th>Score</th>
+    <th>Cookie Points</th>
   </thead>
   <tbody>
     <% reversed_games = games.reverse %>

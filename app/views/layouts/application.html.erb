@@ -23,7 +23,7 @@
              <li><%= link_to "See All Players", users_path %></li>
            </ul>
            <ul id="nav-mobile" class="right hide-on-med-and-down">
-             <% @user = User.find(session[:user_id]) %>
+             <% @user = current_user) %>
              <li><%= link_to  @user.username, user_path(@user) %></li>
              <li><%= link_to "Logout", logout_path, method:"delete" %></li>
            </ul>
@@ -38,8 +38,8 @@
       </div>
       <% if logged_in? && session[:ready] == false %>
       <div class="col s3">
-        <div class="card blue-grey lighten-2">
-          <div class="card-content white-text">
+        <div class="card teal lighten-5 card-teal-border">
+          <div class="card-content black-text">
             <span class="card-title">Top Player Cookies</span>
             <% @users = User.all %>
             <% top_three_scores = @users.sort_by do |user| %>
@@ -53,8 +53,8 @@
                 <tbody>
                   <% new_array = top_three_scores.map do |user| %>
                   <tr>
-                    <td><%= "#{user.username}" %></td>
-                    <td><%= "#{user.cumulative_score}" %></td>
+                    <td><%= link_to user.username, user_path(user) %></td>
+                    <td><%= user.cumulative_score %></td>
                   </tr>
                   <% end %>
                 </tbody>
@@ -72,8 +72,8 @@
               <tbody>
                 <% new_array = top_three_scores.map do |user| %>
                 <tr>
-                  <td><%= "#{user.username}" %></td>
-                  <td><%= "#{user.current_score}" %></td>
+                  <td><%= link_to user.username, user_path(user)  %></td>
+                  <td><%= user.current_score %></td>
                 </tr>
                 <% end %>
               </tbody>
@@ -83,17 +83,19 @@
       <% elsif session[:ready] == true %>
       <br>
       <br>
+
       <%= image_tag("doom.png", :alt => "doom") %>
       <br>
       <br>
-
       <%= link_to("I'm Ready...Start Game!", create_game_path, method: :post, class: " btn")%>
+
       <br><br>
-      <h3>Hint</h3>
-      <p>Use the "Shuffle Words" button if you get stuck!</p>
+        <h3 class="center-align">Hint</h3>
+        <p class="center-align">Use the "Shuffle Words" button if you get stuck!</p>
+      </div>
 
       <% end %>
-      </div>
+
 
 
 

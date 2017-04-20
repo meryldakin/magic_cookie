@@ -18,11 +18,11 @@ html {
  }
 
 th {
-  font-size: 23px
+  font-size: 20px
 }
 
 p, li, td {
-  font-size: 20px
+  font-size: 18px
 }
 
 .nav-wrapper {
@@ -38,6 +38,12 @@ p, li, td {
   border-radius: 10px;
 
 }
+.card-teal-border {
+  border:5px solid teal;
+  border-radius: 10px;
+
+}
+
 
 .card-image-fortune {
   float: right;
@@ -48,4 +54,15 @@ p, li, td {
 
 .small-fonter {
   font-size: 38px;
+}
+
+.big-fonter {
+  font-size: 100px;
+}
+
+.icon {
+  position: relative;
+  /* Adjust these values accordingly */
+  top: -50px;
+  left: -25px;
 }
