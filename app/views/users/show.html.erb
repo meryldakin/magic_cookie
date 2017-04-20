@@ -1,31 +1,42 @@
 
 <% games = @user.games %>
-<h1>player: <%= @user.username %></h1>
+<%= link_to "Edit Profile", edit_user_path(@user) %>
+<h1 class="center-align">player: <%= @user.username %></h1>
+<h3 class="center-align">favorite fortune:</h3>
+<h4 class="red-text center-align"><%= @user.favorite_fortune %></h4>
 <div class="row">
-  <div class="col s12 m5">
+  <div class="col s4">
     <div class="card-panel teal">
       <span class="white-text">
         Latest Score: <%= @user.current_score %>
       </span>
     </div>
   </div>
-  <div class="col s12 m5">
+  <div class="col s4">
     <div class="card-panel teal">
       <span class="white-text">
         Cumulative Score: <%= @user.cumulative_score %>
       </span>
     </div>
   </div>
+  <div class="col s4">
+    <div class="card-panel teal">
+      <span class="white-text">
+        Games Played: <%= @user.games.count %>
+      </span>
+    </div>
+  </div>
 </div>
 <table class="striped">
   <thead>
-    <th>Game</th>
+    <th>Game (most recent first)</th>
     <th>Score</th>
   </thead>
   <tbody>
-    <% games.each do |game| %>
+    <% reversed_games = games.reverse %>
+    <% reversed_games.each_with_index do |game,index| %>
     <tr>
-      <td><%= game.id %></td>
+      <td><%= index + 1 %></td>
       <td><%= game.score %></td>
     </tr>
     <% end %>

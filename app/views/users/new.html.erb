@@ -7,5 +7,9 @@ Create New User
 <%= f.text_field :username %>
 <%= f.label :password %>
 <%= f.password_field :password %>
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation %>
+<%= f.label :favorite_fortune %>
+<%= f.text_field :favorite_fortune %>
 <%= f.submit %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417212636) do
+ActiveRecord::Schema.define(version: 20170420140915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20170417212636) do
     t.string  "password_digest"
     t.integer "cumulative_score"
     t.integer "current_score"
+    t.string  "favorite_fortune"
   end
 
 end

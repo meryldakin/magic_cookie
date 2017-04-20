@@ -6,6 +6,7 @@ class GamesController < ApplicationController
   end
 
   def create
+    session[:ready] = false
     @game = Game.create(user_id: session[:user_id], score: 0)
     session[:game_id] = @game.id
     session[:bear] = "new"
