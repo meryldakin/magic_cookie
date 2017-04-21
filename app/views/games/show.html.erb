@@ -1,56 +1,16 @@
-<!-- Fortune -->
-<!-- Form for user input -->
-<br><br>
-<% @game = Game.find(session[:game_id]) %>
+<h1>Game Recap</h1>
 
-<h1>Scrambled Proverb:</h1>
-<br><br>
-<blockquote>
-<div id="text">
-  <%= @game.fortune_scrambler %>
-</div>
-</blockquote>
-<br>
-<button id="shuffle" type="button">Shuffle</button>
-
-<br><br>
-Score: <%= @game.score %>
-<br><br>
-
-<% if session[:bear] %>
-<%= "THERES A BEAR "%>
+<h4>Final Cookies: <%= @game.score %></h4>
+<h4>Fortunes Unshuffled Correctly:</h4>
+<% if !@game.fortunes.empty? %>
+  <ul>
+    <% @game.fortunes.each do |fortune| %>
+    <li>
+      - "<%= fortune.proverb %>"
+    </li>
+    <% end %>
+  </ul>
 <% else %>
-<%= "u win cookie" %>
+<br>
+<h5 class="teal-text">Cookie Bear ate all da cookies :(</h5>
 <% end %>
-
-<div class="well">
-  <h1>Unscramble the fortune to get the cookie!</h1>
-  <%= form_tag game_update_path, method: "patch" do %>
-      <%= text_field_tag :user_answer %>
-      <%= hidden_field_tag 'game', @game %>
-
-
-      <%= submit_tag "Check Answer" %>
-  <% end %>
-</div>
-
-<script>
-
-document.addEventListener('DOMContentLoaded', function(){
-
-    var textDiv = document.getElementById('text');
-    document.getElementById('shuffle').addEventListener('click',function(){
-        var words = textDiv.innerText.split(' ');
-        var len = words.length;
-        var result = '';
-        textDiv.innerText = '';
-        for(var i = 0; i < len; ++i){
-            var randIndex = Math.floor((Math.random() * (words.length)));
-            result += words[randIndex] + ' ';
-            words.splice(randIndex, 1);
-        }
-        textDiv.innerText = result;
-    }, false);
-}, false)
-
-</script>

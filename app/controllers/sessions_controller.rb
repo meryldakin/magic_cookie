@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def index
+    if session[:user_id]
+      redirect_to user_path(current_user)
+    end
   end
 
   def new
@@ -10,6 +13,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user.present? && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      session[:ready] = false
       redirect_to user_path(@user)
     else
       redirect_to login_path

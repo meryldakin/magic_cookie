@@ -3,34 +3,22 @@ class Game < ApplicationRecord
   has_many :game_fortunes
   has_many :fortunes, through: :game_fortunes
 
-
-  # @@original_fortune = Fortune.select_fortune.proverb
-
-
-
-  def gameplay
-    show_scrambled_fortune
-    check_user_input
-    if #correct
-      correct_answer
-    elsif #incorrect
-      incorrect_answer
-    elsif #bad_answer
-      bad_answer
-    end
-  end
-
-  def game_fortunes
-    five_proverbs = Fortune.all.shuffle.take(5)
-  end
-
   def fortune_scrambler
-    # @fortune = Fortune.all.sample
-    # @fortune = Fortune.select_fortune
-    # @original_fortune = original_fortune
-    @original_fortune = Fortune.select_fortune.proverb
-    @fortune = @original_fortune.downcase.gsub(/[^a-z0-9\s]/i, '') #removes punctation
-    @fortune.split(' ').shuffle.join(' ')
+    original_fortune = Fortune.select_fortune
+    self.fortunes << original_fortune
+    self.save
+    fortune = original_fortune.proverb.downcase.gsub(/[^a-z0-9\s]/i, '') #removes punctation
+    fortune.split(' ').shuffle.join(' ')
+  end
+
+  def current_fortune
+    current_fortune_id = self.game_fortunes.last.fortune_id
+    Fortune.find(current_fortune_id)
+  end
+
+  def last_fortune
+    last_fortune_id = self.game_fortunes[-2].fortune_id
+    Fortune.find(last_fortune_id)
   end
 
   def self.all_fortunes
@@ -39,28 +27,47 @@ class Game < ApplicationRecord
     end
   end
 
+  def correct_answer(answer)
+    answer.downcase.gsub(/[^a-z0-9\s]/i, '') == self.current_fortune.proverb.downcase.gsub(/[^a-z0-9\s]/i, '')
+  end
 
+  def win_round
+    self.difficulty == "easy" ? self.score += 75 : self.score += 100
+    self.save
+  end
 
-  # def original_fortune
-  #   @original_fortune
-  #   # @original_fortune.proverb
+  def lose_round
+    self.difficulty == "easy" ? self.score -= 50 : self.score -= 75
+    self.save
+  end
+
+  # def check_user_input(correct_answer)
+  #   if correct_answer
+  #     self.score += 100
+  #     self.save
+  #     if self.score < 300
+  #       # session[:bear] = "won" #won a round
+  #       redirect_to game_path(self)
+  #     else
+  #       # session[:won] = true
+  #       user.cumulative_score += self.score
+  #       user.current_score = self.score
+  #       user.save
+  #       redirect_to game_over_path(self)
+  #     end
+  #   elsif correct_answer == false
+  #     self.score -= 75
+  #     self.save
+  #     if self.score > 0
+  #       # session[:bear] = "lost" #lost a round
+  #       redirect_to game_path(self)
+  #     else
+  #       # session[:won] = false
+  #       user.cumulative_score += self.score
+  #       user.current_score = self.score
+  #       user.save
+  #       redirect_to game_over_path(self)
+  #     end
+  #   end
   # end
-
-  def check_user_input
-
-  end
-
-  def correct_answer
-
-  end
-
-  def incorrect_answer
-
-  end
-
-  def bad_answer
-
-  end
-
-
 end

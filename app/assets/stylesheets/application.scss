@@ -1,0 +1,71 @@
+@import "materialize";
+@import url('https://fonts.googleapis.com/css?family=Griffy');
+@import url('https://fonts.googleapis.com/css?family=Alegreya|Averia+Serif+Libre|Cabin+Sketch|IM+Fell+English+SC|Sorts+Mill+Goudy|Special+Elite');
+
+blockquote{
+  margin: 20px 0;
+  padding-left: 1.5rem;
+  border-left: 5px solid teal; /* Just change the color value and that's it*/
+}
+
+h1, h2, h3 {
+  font-family: "Griffy", cursive;
+}
+
+html {
+   font-family: 'Averia Serif Libre', cursive;
+ }
+
+th {
+  font-size: 20px
+}
+
+p, li, td {
+  font-size: 18px
+}
+
+.nav-wrapper {
+  background-color: #ffc107 !important;
+}
+
+.card-panel {
+  font-size: 20px;
+}
+
+.card-red-border {
+  border:5px solid red;
+  border-radius: 10px;
+
+}
+.card-teal-border {
+  border:5px solid teal;
+  border-radius: 10px;
+
+}
+
+
+.card-image-fortune {
+  float: right;
+}
+.red-text {
+  font-color: red;
+}
+
+.small-fonter {
+  font-size: 38px;
+}
+
+.big-fonter {
+  font-size: 100px;
+}
+
+.icon {
+  position: relative;
+  top: -50px;
+  left: -25px;
+}
+
+#nav-button {
+  position: relative;
+  top: 13px;
+}

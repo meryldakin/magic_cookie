@@ -1,31 +1,57 @@
-<% @user = User.find(session[:user_id]) %>
-<h1><%= @user.username %> Profile</h1>
-
-<p><%= link_to "Start new game", create_game_path, method:"post" %></p>
-<br>
-
-<p><%= link_to "Edit username", edit_user_path, method:"get" %></p>
-<br>
-
-Current Score: <%= @user.current_score %>
-<br><br>
-Cumulative Score: <%= @user.cumulative_score %>
-<br>
 <% games = @user.games %>
-<br>
-Game Scores:
-<br>
-<table class="table table-striped">
-  <thead>
-    <th>Game</th>
-    <th>Score</th>
-  </thead>
-  <tbody>
-    <% games.each do |game| %>
-    <tr>
-      <td><%= game.id %></td>
-      <td><%= game.score %></td>
-    </tr>
+<div class="center-align row">
+  <div class="col s12">
+    <h1 class="center-align big-fonter"> <%= @user.username.upcase %>
+    <% if user_path(@user) == user_path(User.find(session[:user_id])) %>
+      <%= link_to edit_user_path(@user) do %>
+        <i class="material-icons icon">mode_edit</i>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+    </h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col s4">
+    <div class="card-panel ">
+      <span class="black-text">
+        <div class="center-align">
+          <i class="material-icons">assessment</i>
+
+        </div>
+        <br>
+        Latest Cookie Points: <%= @user.current_score %>
+        <br>
+        All Cookie Points: <%= @user.cumulative_score %>
+        <br>
+        Games Played: <%= @user.games.count %>
+      </span>
+    </div>
+  </div>
+  <div class="col s4">
+    <div class="card-panel ">
+      <span class="black-text">
+        <div class="center-align">
+          <%= image_tag ("fortune_icon.png"), style:"width:25px;height:25px;"%>
+        </div>
+        <h4 class="teal-text center-align"><%= @user.favorite_fortune %></h4>
+      </span>
+    </div>
+  </div>
+  <div class="col s4">
+    <div class="card-panel ">
+      <span class="black-text">
+        <div class="center-align">
+          <div class="center-align">
+            <%= image_tag("trophy.png", style:"width:25px;height:25px;") %>
+
+          </div>
+
+        </div>
+        <br>
+        <div class="center-align"><%= link_to "All Games Played", user_games_path(@user) %></div>
+        <br>
+        <div class="center-align"><%= link_to "All Fortunes Won", user_fortunes_path(@user) %></div>
+      </span>
+    </div>
+  </div>
+</div>

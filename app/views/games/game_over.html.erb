@@ -1,19 +1,62 @@
 <% @game = Game.find(session[:game_id]) %>
 <% @user = User.find(session[:user_id]) %>
-<div class="jumbotron">
-  <div class="container">
-
-    <% if session[:won] == true %>
-    <h1> You win all the fortune cookies!</h1>
-    <p class="lead">final score: <%= @game.score %></p>
-    <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
-    pic of fortune cookies
-    <% else %>
-    <h1>Cookie bear eats your fortunes :(</h1>
-    <p class="lead">final score: <%= @game.score %></p>
-    <p class="lead"><%= @user.username %> cumulative score: <%= @game.score %></p>
-    pic of cookie bear
-    <% end %>
-    <p><a class="btn btn-primary btn-lg" href="/users/<%= @user.id %>" role="button">User Homepage</a></button></p>
+<div class="container">
+  <% if session[:won] == true %>
+  <h3 class="center-align"> You win all the fortune cookies!</h3>
+  <div class="col s4"></div>
+  <div class="col s4">
+    <%= link_to("Play Again!", ready_path, class: "waves-effect waves-light btn")%>
   </div>
+  <div class="col s4"></div>
+  <br><br>
+  <div class="center-align">
+    <%= image_tag("defeated_bear.gif", :alt => "victroy") %>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <div class="card-panel card-teal-border center-align">
+        <span class="teal-text">
+          Final Cookie Points: <%= @game.score %>
+        </span>
+      </div>
+    </div>
+    <div class="col s6">
+      <div class="card-panel card-teal-border center-align">
+        <span class="teal-text">
+          Player Cookie Points: <%= @user.cumulative_score %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  <h3 class="center-align">Cookie bear eats all your cookies :(</h3>
+  <div class="col s4">
+  </div>
+  <div class="col s4">
+    <%= link_to("Play Again!", ready_path, class: "waves-effect waves-light btn")%>
+  </div>
+  <div class="col s4">
+
+  </div>
+  <br><br>
+  <div class="center-align">
+    <%= image_tag("bear_cry.gif", :alt => "cry bear") %>
+  </div>
+  <div class="row">
+    <div class="col s6">
+      <div class="card-panel card-teal-border center-align">
+        <span class="teal-text">
+          Final Cookie Points: <%= @game.score %>
+        </span>
+      </div>
+    </div>
+    <div class="col s6">
+      <div class="card-panel card-teal-border center-align">
+        <span class="teal-text">
+          Player Cookie Points: <%= @user.cumulative_score %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>

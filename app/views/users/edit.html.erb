@@ -1,9 +1,11 @@
 <h1>
-Edit User
+Edit username or fortune
 </h1>
 
 <%= form_for @user do |f| %>
 <%= f.label :username %>
 <%= f.text_field :username %>
-<%= f.submit %>
+<%= f.label :favorite_fortune %>
+<%= f.text_field :favorite_fortune %>
+<%= f.submit "Update Player", class:"btn"%>
 <% end %>

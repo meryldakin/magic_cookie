@@ -10,7 +10,9 @@ end
 
 gem 'pg'
 gem 'rails', '~> 5.0.2'
-gem 'bootstrap-sass', '3.3.6'
+gem 'materialize-sass'
+
+# gem 'bootstrap-sass', '3.3.6'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use Puma as the app server

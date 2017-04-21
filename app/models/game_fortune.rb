@@ -1,6 +1,6 @@
-class GameFortunes < ApplicationRecord
-  belongs_to :games
-  belongs_to :fortunes
+class GameFortune < ApplicationRecord
+  belongs_to :game
+  belongs_to :fortune
 
 
 
