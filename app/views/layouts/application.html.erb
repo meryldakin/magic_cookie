@@ -14,29 +14,25 @@
   <% unless !logged_in? %>
   <nav>
     <div class="nav-wrapper">
-      <%= link_to "Magic Cookies", about_path, class:"brand-logo center" %>
+      <%= link_to("New Game", ready_path, class: "btn center brand-logo", id:"nav-button")%>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li>
-          <%= link_to("New Game", ready_path, class: "btn")%>
-
-        </li>
-        <li><%= link_to "See All Players", users_path %></li>
+        <li><%= link_to "Magic Cookies", about_path, class: "brand-logo"%></li>
       </ul>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <% @user = User.find(session[:user_id]) %>
+        <% @user = current_user %>
         <li><%= link_to  @user.username, user_path(@user) %></li>
+        <li><%= link_to "See All Players", users_path %></li>
         <li><%= link_to "Logout", logout_path, method:"delete" %></li>
       </ul>
 
     </div>
   </nav>
   <% end %>
-
-  <div class="row">
-    <div class="col s9">
-      <%= yield %>
-    </div>
     <% if logged_in? && session[:ready] == false %>
+    <div class="row">
+      <div class="col s9">
+        <%= yield %>
+      </div>
     <div class="col s3">
       <div class="card teal lighten-5 card-teal-border">
         <div class="card-content black-text">
@@ -81,23 +77,9 @@
         </div>
       </div>
       <% elsif session[:ready] == true %>
-      <br>
-      <br>
-
-      <%= image_tag("doom.png", :alt => "doom") %>
-      <br>
-      <br>
-      <%= link_to("I'm Ready...Start Game!", create_game_path, method: :post, class: " btn")%>
-
-      <br><br>
-      <h3 class="center-align">Hint</h3>
-      <p class="center-align">Use the "Shuffle Words" button if you get stuck!</p>
-    </div>
-
-    <% end %>
-
-
-
-
+        <div class="row">
+            <%= yield %>
+        </div>
+      <% end %>
   </body>
-  </html>
+</html>
