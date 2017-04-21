@@ -1,5 +1,8 @@
 class GamesController < ApplicationController
   before_action :require_login
+  def index
+
+  end
 
   def new
     redirect_to create_game_path
@@ -7,14 +10,25 @@ class GamesController < ApplicationController
 
   def create
     session[:ready] = false
-    @game = Game.create(user_id: session[:user_id], score: 0)
-    session[:game_id] = @game.id
-    session[:bear] = "new"
-    redirect_to game_path(@game)
+    @game = Game.new(user_id: session[:user_id], score: 0)
+    @game.difficulty = params[:difficulty]
+    if @game.save
+      session[:game_id] = @game.id
+      session[:bear] = "new"
+      redirect_to play_game_path(@game)
+    else
+      redirect_to ready_path
+    end
+  end
+
+  def play
+    session[:ready] = false
+    @game = Game.find(session[:game_id])
   end
 
   def show
-    @game = Game.find(session[:game_id])
+    session[:ready] = false
+    @game = Game.find(params[:id])
   end
 
   def update
@@ -25,7 +39,7 @@ class GamesController < ApplicationController
       @game.win_round
       if @game.score < 300
         session[:bear] = "won" #won a round
-        redirect_to game_path(@game)
+        redirect_to play_game_path(@game)
       else
         session[:won] = true
         user.update_user_scores(@game)
@@ -35,7 +49,7 @@ class GamesController < ApplicationController
       @game.lose_round
       if @game.score > 0
         session[:bear] = "lost" #lost a round
-        redirect_to game_path(@game)
+        redirect_to play_game_path(@game)
       else
         session[:won] = false
         user.update_user_scores(@game)

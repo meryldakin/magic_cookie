@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   def index
+    session[:ready] = false
     @users = User.all
   end
 
@@ -23,10 +24,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    session[:ready] = false
     @user = User.find(params[:id])
   end
 
   def edit
+    session[:ready] = false
     @user = User.find(params[:id])
   end
 

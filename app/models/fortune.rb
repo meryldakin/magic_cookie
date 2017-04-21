@@ -1,6 +1,7 @@
 class Fortune < ApplicationRecord
   has_many :game_fortunes
   has_many :games, through: :game_fortunes
+  has_many :users, through: :game_fortunes
 
 
 

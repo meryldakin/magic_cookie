@@ -32,12 +32,12 @@ class Game < ApplicationRecord
   end
 
   def win_round
-    self.score += 100
+    self.difficulty == "easy" ? self.score += 75 : self.score += 100
     self.save
   end
 
   def lose_round
-    self.score -= 75
+    self.difficulty == "easy" ? self.score -= 50 : self.score -= 75
     self.save
   end
 

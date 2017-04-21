@@ -18,7 +18,7 @@
           </ul>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <% @user = current_user %>
-            <li><%= link_to  @user.username, user_path(@user) %></li>
+            <li><%= link_to  @user.username.capitalize, user_path(@user) %></li>
             <li><%= link_to "See All Players", users_path %></li>
             <li><%= link_to "Logout", logout_path, method:"delete" %></li>
           </ul>
@@ -30,56 +30,55 @@
         <div class="col s9">
           <%= yield %>
         </div>
-      <div class="col s3">
-        <div class="card teal lighten-5 card-teal-border">
-          <div class="card-content black-text">
-            <span class="card-title">Top Player Cookies</span>
-              <% @users = User.all %>
-              <% top_three_scores = @users.sort_by do |user| %>
-                <% user.cumulative_score %>
-              <% end.reverse[0..2] %>
-            <table>
-              <thead>
-                <th>Username</th>
-                <th>Cookies</th>
-              </thead>
-              <tbody>
-                <% new_array = top_three_scores.map do |user| %>
-                  <tr>
-                    <td><%= link_to user.username, user_path(user) %></td>
-                    <td><%= user.cumulative_score %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <br>
-            <span class="card-title">Top Game Cookies</span>
-              <% top_three_scores = @users.sort_by do |user| %>
-                <% user.current_score %>
-              <% end.reverse[0..2] %>
-            <table>
-              <thead>
-                <th>Username</th>
-                <th>Cookies</th>
-              </thead>
-              <tbody>
-                <% new_array = top_three_scores.map do |user| %>
-                  <tr>
-                    <td><%= link_to user.username, user_path(user)  %></td>
-                    <td><%= user.current_score %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
+        <div class="col s3">
+          <div class="card teal lighten-5 card-teal-border">
+            <div class="card-content black-text">
+              <span class="card-title">Top Player Cookies</span>
+                <% @users = User.all %>
+                <% top_three_scores = @users.sort_by do |user| %>
+                  <% user.cumulative_score %>
+                <% end.reverse[0..2] %>
+              <table>
+                <thead>
+                  <th>Username</th>
+                  <th>Cookies</th>
+                </thead>
+                <tbody>
+                  <% new_array = top_three_scores.map do |user| %>
+                    <tr>
+                      <td><%= link_to user.username, user_path(user) %></td>
+                      <td><%= user.cumulative_score %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <br>
+              <span class="card-title">Top Game Cookies</span>
+                <% top_three_scores = @users.sort_by do |user| %>
+                  <% user.current_score %>
+                <% end.reverse[0..2] %>
+              <table>
+                <thead>
+                  <th>Username</th>
+                  <th>Cookies</th>
+                </thead>
+                <tbody>
+                  <% new_array = top_three_scores.map do |user| %>
+                    <tr>
+                      <td><%= link_to user.username, user_path(user)  %></td>
+                      <td><%= user.current_score %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
         <% elsif session[:ready] == true %>
           <div class="row">
               <%= yield %>
           </div>
         <% elsif logged_in? == false %>
         <div class="container">
-
           <%= yield %>
         </div>
       <% end %>

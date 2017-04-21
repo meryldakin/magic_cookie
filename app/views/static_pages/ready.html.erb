@@ -4,24 +4,31 @@
   <div class="col s7">
     <h1>COOKIE BEAR <br>like fortune cookies.</h1>
     <p>cookies? yum. that’s what BEAR say.</p>
-    <p>BEAR wanna eat ALL your fortune cookies.
+    <p>BEAR wanna eat ALL your fortune cookies.<br>
       but fortunes in the cookies all mixed up, like:</p>
       <p>you eat what you are.<br>
         what you are you eat.<br>
         are you you eat what.<br>
         <p>if u can get it right in less than 20 seconds, u win fortune cookies!<br> if u can’t, BEAR eats your cookies :( <br> if u win 300 cookies, you win game! <br> if u lose all your cookies, BEAR eat them all :(</p>
+        <h5 class="teal-text"><b>Hint: Use the "Shuffle Words" button if you get stuck!</b></h5>
   </div>
   <div class="col s3">
     <div class="card-panel">
       <%= image_tag("doom.png", :alt => "doom") %>
+      <br><br><br>
+      <h5 class="center-align">Choose your level:</h5>
       <br><br>
       <div class="center-align">
-        <%= link_to("START GAME!", create_game_path, method: :post, class: " btn")%>
-
+        <%= form_tag(create_game_path, method: "post") do %>
+          <%= hidden_field_tag :difficulty, "easy" %>
+          <%= submit_tag 'SOFT COOKIE', class:"btn" %>
+        <% end %>
+        <%= form_tag(create_game_path, method: "post") do %>
+        <%= hidden_field_tag :difficulty, "hard" %>
+          <%= submit_tag 'HARD COOKIE', class:"btn" %>
+        <% end %>
       </div>
-      <br>
-      <h3 class="center-align">Hint:</h3>
-      <p class="center-align">Use the "Shuffle Words" button if you get stuck!</p>
+
     </div>
   </div>
   <div class="col s1">

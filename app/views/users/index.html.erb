@@ -1,20 +1,22 @@
 <h1>All Players</h1>
+<div class="container">
 
-<table class="bordered highlight">
-  <thead>
-    <th>Username</th>
-    <th>Favorite Fortune</th>
-    <th>Most Recent Cookies Eaten</th>
-    <th>Total Cookies Eaten</th>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= link_to user.username, user_path(user)%></b></td>
-      <td><%= user.favorite_fortune %></td>
-      <td><%= user.current_score %></td>
-      <td><%= user.cumulative_score %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <table class="bordered highlight">
+    <thead>
+      <th class="center-align">Username</th>
+      <th class="center-align">Favorite Fortune</th>
+      <th class="center-align">Most Recent Cookies Eaten</th>
+      <th class="center-align">Total Cookies Eaten</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td class="center-align"><%= link_to user.username, user_path(user)%></b></td>
+        <td><%= user.favorite_fortune %></td>
+        <td class="center-align"><%= user.current_score %></td>
+        <td class="center-align"><%= user.cumulative_score %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

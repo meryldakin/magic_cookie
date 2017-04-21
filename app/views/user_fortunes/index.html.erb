@@ -1,0 +1,9 @@
+<h1><%= @user.username.capitalize %>'s Fortunes</h1>
+<div class="container">
+
+  <ol>
+    <% @user.fortunes.each do |fortune| %>
+    <li>"<%= fortune.proverb %>"</li>
+    <% end %>
+  </ol>
+</div>

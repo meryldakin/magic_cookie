@@ -27,30 +27,31 @@
       </span>
     </div>
   </div>
-  <div class="col s8">
+  <div class="col s4">
     <div class="card-panel ">
       <span class="black-text">
         <div class="center-align">
           <%= image_tag ("fortune_icon.png"), style:"width:25px;height:25px;"%>
-
         </div>
         <h4 class="teal-text center-align"><%= @user.favorite_fortune %></h4>
       </span>
     </div>
   </div>
+  <div class="col s4">
+    <div class="card-panel ">
+      <span class="black-text">
+        <div class="center-align">
+          <div class="center-align">
+            <%= image_tag("trophy.png", style:"width:25px;height:25px;") %>
+
+          </div>
+
+        </div>
+        <br>
+        <div class="center-align"><%= link_to "All Games Played", user_games_path(@user) %></div>
+        <br>
+        <div class="center-align"><%= link_to "All Fortunes Won", user_fortunes_path(@user) %></div>
+      </span>
+    </div>
+  </div>
 </div>
-<table class="striped">
-  <thead>
-    <th>Game (most recent first)</th>
-    <th>Cookie Points</th>
-  </thead>
-  <tbody>
-    <% reversed_games = games.reverse %>
-    <% reversed_games.each_with_index do |game,index| %>
-    <tr>
-      <td><%= index + 1 %></td>
-      <td><%= game.score %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
