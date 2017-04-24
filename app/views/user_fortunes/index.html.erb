@@ -1,9 +1,12 @@
 <h1><%= @user.username.capitalize %>'s Fortunes</h1>
 <div class="container">
-
+<% if !@user.winning_fortunes.empty? %>
   <ol>
-    <% @user.fortunes.each do |fortune| %>
+    <% @user.winning_fortunes.each do |fortune| %>
     <li>"<%= fortune.proverb %>"</li>
     <% end %>
   </ol>
+  <% else %>
+  <h5 class="teal-text">Cookie Bear ate all da cookies :(</h5>
+  <% end %>
 </div>

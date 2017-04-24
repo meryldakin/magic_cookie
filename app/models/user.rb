@@ -10,5 +10,17 @@ class User < ApplicationRecord
     self.save
   end
 
+  def winning_fortunes
+    game_fortune_array = self.game_fortunes.all.select do |fortune|
+      fortune.result == "won"
+    end
+
+    game_fortune_array.map do |game_fortune|
+      Fortune.find(game_fortune.fortune_id)
+    end
+
+  end
+
+
 
 end

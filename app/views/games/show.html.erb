@@ -2,9 +2,9 @@
 
 <h4>Final Cookies: <%= @game.score %></h4>
 <h4>Fortunes Unshuffled Correctly:</h4>
-<% if !@game.fortunes.empty? %>
+<% if !@game.won_fortunes.empty? %>
   <ul>
-    <% @game.fortunes.each do |fortune| %>
+    <% @game.won_fortunes.each do |fortune| %>
     <li>
       - "<%= fortune.proverb %>"
     </li>

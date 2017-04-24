@@ -11,14 +11,18 @@
     <table class="striped">
       <thead>
         <th class="center-align">Game (most recent first)</th>
+        <th class="center-align">Result</th>
         <th class="center-align">Cookie Points</th>
+        <th class="center-align">Difficulty</th>
       </thead>
       <tbody>
         <% reversed_games = games.reverse %>
         <% reversed_games.each_with_index do |game,index| %>
         <tr>
           <td class="center-align"> <%= link_to "Game #{index + 1}", game_path(game)%></td>
+          <td class="center-align"><%= game.score > 0 ? "Won" : "Lost" %></td>
           <td class="center-align"><%= game.score %></td>
+          <td class="center-align"><%= game.difficulty ? game.difficulty.capitalize : "--"%></td>
         </tr>
         <% end %>
       </tbody>

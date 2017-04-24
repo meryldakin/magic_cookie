@@ -33,13 +33,27 @@ class Game < ApplicationRecord
 
   def win_round
     self.difficulty == "easy" ? self.score += 75 : self.score += 100
-    
+    round_fortune = self.game_fortunes.last
+    round_fortune.won
+    round_fortune.save
     self.save
   end
 
   def lose_round
     self.difficulty == "easy" ? self.score -= 50 : self.score -= 75
+    round_fortune = self.game_fortunes.last
+    round_fortune.lost
+    round_fortune.save
     self.save
+  end
+
+  def won_fortunes
+    gf_array = self.game_fortunes.select do |gf|
+      gf.result == "won"
+    end
+    gf_array.map do |gf|
+      Fortune.find(gf.fortune_id)
+    end
   end
 
   # def check_user_input(correct_answer)
