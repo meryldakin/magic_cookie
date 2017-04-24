@@ -16,7 +16,7 @@ class User < ApplicationRecord
     end
 
     game_fortune_array.map do |game_fortune|
-      Fortune.find(game_fortune.fortune_id)
+      game_fortune.fortune
     end
 
   end

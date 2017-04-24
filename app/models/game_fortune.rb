@@ -4,10 +4,12 @@ class GameFortune < ApplicationRecord
 
   def won
     self.result = "won"
+    self.save
   end
 
   def lost
     self.result = "lost"
+    self.save
   end
 
 
