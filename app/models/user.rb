@@ -10,4 +10,5 @@ class User < ApplicationRecord
     self.save
   end
 
+
 end
